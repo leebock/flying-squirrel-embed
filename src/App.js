@@ -1,6 +1,7 @@
 import './App.css';
 
 import { useState, useEffect } from 'react';
+import { SquirrelMap } from './components/SquirrelMap';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>Section: <strong>{section}</strong></div>
+      <SquirrelMap></SquirrelMap>
     </div>
   );
 }
