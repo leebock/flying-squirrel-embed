@@ -7,10 +7,43 @@ import Graphic from "@arcgis/core/Graphic";
 import _geoJsonRoute from "../data/saturday-run.json";
 import '@arcgis/core/assets/esri/css/main.css';
 
-export const SquirrelMap = ({camera})=>{
+const ps3Dl = {
+  type: "path",  // autocasts as new PathSymbol3DLayer()
+  profile: "circle",  // creates a rectangular shape
+  width: 10,  // path width will also set the height to the same value
+  material: { color: "white" },
+  cap: "round"
+};
+
+const createRenderer = (stage)=> {
+  return {
+    type: "unique-value",
+    field: "Descript",
+    defaultSymbol: {
+      type: "line-3d",  // autocasts as new LineSymbol3D()
+      symbolLayers: [ps3Dl]
+    },
+    uniqueValueInfos: !stage ? 
+      [] : 
+      [
+        {
+          value: stage.toString(),
+          symbol: {
+            type: "line-3d",  // autocasts as new LineSymbol3D()
+            symbolLayers: [{...ps3Dl, material: { color: "#ff7380" }}]    
+          }
+        }
+      ]
+  };  
+}
+
+export const SquirrelMap = ({camera, stage})=>{
+
     const _refMap = useRef(null);
     const _refView = useRef(null);
+    const _refRouteLayer = useRef(null);
     const _refGraphicsLayer = useRef(null);
+
     
     useEffect(
         ()=>{
@@ -26,27 +59,15 @@ export const SquirrelMap = ({camera})=>{
             {type: "application/json"}
           );
           // URL reference to the blob
-          const routeLayer = new GeoJSONLayer(
+          _refRouteLayer.current = new GeoJSONLayer(
             {
               url: URL.createObjectURL(blob),
               elevationInfo: "relative-to-ground",
-              renderer: {
-                type: "simple",
-                symbol: {
-                  type: "line-3d",  // autocasts as new LineSymbol3D()
-                  symbolLayers: [{
-                    type: "path",  // autocasts as new PathSymbol3DLayer()
-                    profile: "circle",  // creates a rectangular shape
-                    width: 10,  // path width will also set the height to the same value
-                    material: { color: "#ff7380" },
-                    cap: "round"
-                  }]
-                }
-              }
+              renderer: createRenderer()
             }
           );
 
-          _refMap.current.add(routeLayer);
+          _refMap.current.add(_refRouteLayer.current);
 	        _refView.current = new SceneView({
                 container: "view",
                 map: _refMap.current,
@@ -130,6 +151,13 @@ export const SquirrelMap = ({camera})=>{
       },
       [camera]
     );
+
+    useEffect(
+      ()=>{
+        _refRouteLayer.current.renderer = createRenderer(stage);
+      },
+      [stage]
+    )
 
     return <div id="view"></div>
 }

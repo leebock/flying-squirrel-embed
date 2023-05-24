@@ -7,6 +7,7 @@ function App() {
 
   const [chapter, setChapter] = useState(0);  
   const [camera, setCamera] = useState(null);
+  const [stage, setStage] = useState(null);
 
   useEffect(
     ()=>{
@@ -23,7 +24,7 @@ function App() {
 
   useEffect(
     ()=>{
-
+      setStage(chapter);
       switch(chapter) {
         case 1:
           setCamera(
@@ -126,7 +127,7 @@ function App() {
 
   return (
     <div className="App">
-      <SquirrelMap camera={camera}></SquirrelMap>
+      <SquirrelMap camera={camera} stage={stage}></SquirrelMap>
     </div>
   );
 }
