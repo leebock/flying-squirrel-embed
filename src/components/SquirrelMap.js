@@ -14,6 +14,9 @@ export const SquirrelMap = ({camera})=>{
     
     useEffect(
         ()=>{
+
+          console.log("initializing map...")
+
           _refMap.current = new Map(
               {basemap: "hybrid", ground: "world-elevation"}
           );
