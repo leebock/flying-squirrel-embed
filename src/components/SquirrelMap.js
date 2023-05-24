@@ -15,7 +15,7 @@ export const SquirrelMap = ({camera})=>{
     useEffect(
         ()=>{
           _refMap.current = new Map(
-              {basemap: "satellite", ground: "world-elevation"}
+              {basemap: "hybrid", ground: "world-elevation"}
           );
 
           const blob = new Blob(
