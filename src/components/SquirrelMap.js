@@ -126,17 +126,12 @@ export const SquirrelMap = ({camera, stage})=>{
           _refView.current.watch(
             "camera",
             (camera) => {
-              const {tilt, heading, fov} = camera;
+              const {tilt, heading} = camera;
               const {latitude, longitude, z} = camera.position;
               console.log("******************************");
-              console.log("position", latitude, longitude, z)
-              console.log("tilt", tilt);
-              console.log("heading", heading);
-              console.log("fov", fov);
-              console.log(JSON.stringify(camera.toJSON()))
+              console.log(JSON.stringify({position:{x: longitude, y: latitude, z: z}, tilt: tilt, heading: heading}));
             }
           );
-          
 
         },
         []
