@@ -71,6 +71,7 @@ export const SquirrelMap = ({camera, stage})=>{
 	        _refView.current = new SceneView({
                 container: "view",
                 map: _refMap.current,
+                navigation: {mouseWheelZoomEnabled: false},
                 camera: {
                   position: {
                     x: -82.57080137652181,
