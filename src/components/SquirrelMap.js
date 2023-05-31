@@ -4,7 +4,7 @@ import SceneView from "@arcgis/core/views/SceneView.js";
 import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import Graphic from "@arcgis/core/Graphic";
-import _geoJsonRoute from "../data/saturday-run.json";
+import _geoJsonRoute from "../data/flying_squirrel_official.json";
 import '@arcgis/core/assets/esri/css/main.css';
 
 const ps3Dl = {
@@ -75,16 +75,7 @@ export const SquirrelMap = ({camera, stage})=>{
                   mouseWheelZoomEnabled: false,
                   browserTouchPanEnabled: false
                 },
-                camera: {
-                  position: {
-                    x: -82.57080137652181,
-                    y: 35.61561421226409,
-                    z: 1931
-                  },
-                  tilt: 67,
-                  heading: 93,
-                  fov: 100
-                }
+                camera: {"position":{"x":-82.55402116568489,"y":35.59686012465541,"z":1172.0963501837105},"tilt":67.59129631631237,"heading":32.57667035903703, "fov": 100}
               });
 
 
