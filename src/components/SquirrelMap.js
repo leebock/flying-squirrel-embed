@@ -99,20 +99,20 @@ export const SquirrelMap = ({camera, stage})=>{
               ),
               new Graphic(
                 {
-                  geometry: {type: "point",x: -82.54681495295014,y: 35.60458161641058, z: 200}, 
-                  symbol: {type: "point-3d", symbolLayers: [{...ts3dl, text: "Taco Temple"}]}
-                }
-              ),
-              new Graphic(
-                {
-                  geometry: {type: "point", x: -82.5539519233415, y: 35.61412957325879}, 
-                  symbol: {type: "point-3d", symbolLayers: [{...ts3dl, text: "Weaver Park"}]}
-                }
-              ),
-              new Graphic(
-                {
                   geometry: {type: "point", x: -82.53178870691916, y: 35.623872249757895},
                   symbol: {type: "point-3d", symbolLayers: [{...ts3dl, text: "Western Residence"}]}
+                }
+              ),
+              new Graphic(
+                {
+                  geometry: {type: "point", x: -82.55050898034392, y: 35.60122031621403},
+                  symbol: {type: "point-3d", symbolLayers: [{...ts3dl, text: "Start / Finish"}]}
+                }
+              ),
+              new Graphic(
+                {
+                  geometry: {type: "point", x: -82.54483496802376, y: 35.60323510180051},
+                  symbol: {type: "point-3d", symbolLayers: [{...ts3dl, text: "Asheville Arms"}]}
                 }
               )
             ]
