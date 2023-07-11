@@ -5,7 +5,7 @@ import { SquirrelMap } from './components/SquirrelMap';
 
 function App() {
 
-  const [chapter, setChapter] = useState(0);  
+  const [slide, setSlide] = useState(0);  
   const [camera, setCamera] = useState(null);
   const [stage, setStage] = useState(null);
 
@@ -13,7 +13,7 @@ function App() {
     ()=>{
       window.addEventListener(
         "hashchange", 
-        e => setChapter(
+        e => setSlide(
           parseInt(window.location.hash.replace("#","").trim()) || 0
         )
       );      
@@ -24,17 +24,17 @@ function App() {
 
   useEffect(
     ()=>{
-      if (chapter === 11) {
+      if (slide === 11) {
         setStage(3)
-      } else if (chapter === 12) {
+      } else if (slide === 12) {
         setStage(2)
-      } else if (chapter === 13) {
+      } else if (slide === 13) {
         setStage(1)
       } else {
-        setStage(chapter);
+        setStage(slide);
       }
       
-      switch(chapter) {
+      switch(slide) {
         case 1:
           setCamera({"position":{"x":-82.55496521770479,"y":35.602586944219375,"z":815.0245417039841},"tilt":76.5319587554846,"heading":93.27359372638333});
           break;
@@ -79,7 +79,7 @@ function App() {
           console.log("default")
       }
     },
-    [chapter]
+    [slide]
   )
 
 
