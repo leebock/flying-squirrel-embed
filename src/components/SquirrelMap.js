@@ -138,7 +138,7 @@ export const SquirrelMap = ({slide})=>{
           {...slide.camera, fov: 100},
           {animate: true, duration: 3000, easing: "in-out-cubic"}
         );
-        _refRouteLayer.current.renderer = createRenderer(slide.stage);
+        _refRouteLayer.current.renderer = createRenderer(slide.segment);
       },
       [slide]
     );
