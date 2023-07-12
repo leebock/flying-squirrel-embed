@@ -37,7 +37,7 @@ const createRenderer = (stage)=> {
   };  
 }
 
-export const SquirrelMap = ({camera, stage})=>{
+export const SquirrelMap = ({slide})=>{
 
     const _refMap = useRef(null);
     const _refView = useRef(null);
@@ -135,19 +135,14 @@ export const SquirrelMap = ({camera, stage})=>{
     useEffect(
       ()=>{
         _refView.current.goTo(
-          camera,
+          {...slide.camera, fov: 100},
           {animate: true, duration: 3000, easing: "in-out-cubic"}
         );
+        _refRouteLayer.current.renderer = createRenderer(slide.stage);
       },
-      [camera]
+      [slide]
     );
 
-    useEffect(
-      ()=>{
-        _refRouteLayer.current.renderer = createRenderer(stage);
-      },
-      [stage]
-    )
-
     return <div id="view"></div>
+
 }

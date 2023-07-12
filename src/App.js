@@ -7,9 +7,7 @@ import SLIDES from './data/slides.json';
 
 function App() {
 
-  const [slide, setSlide] = useState(0);  
-  const [camera, setCamera] = useState(null);
-  const [stage, setStage] = useState(null);
+  const [slide, setSlide] = useState(SLIDES[0]);  
   const [showUI, setShowUI] = useState(true);
 
   useEffect(
@@ -17,7 +15,7 @@ function App() {
       window.addEventListener(
         "hashchange", 
         e => setSlide(
-          parseInt(window.location.hash.replace("#","").trim()) || 0
+          SLIDES[parseInt(window.location.hash.replace("#","").trim()) || 0]
         )
       );      
       // hide UI if this is an embed
@@ -28,48 +26,27 @@ function App() {
     []
   );
 
-
-  useEffect(
-    ()=>{
-      
-      if (slide === 11) {
-        setStage(3)
-      } else if (slide === 12) {
-        setStage(2)
-      } else if (slide === 13) {
-        setStage(1)
-      } else {
-        setStage(slide);
-      }
-
-      setCamera(SLIDES[slide]);
-      
-    },
-    [slide]
-  )
-
   const populatePagination = () => 
-    Array
-    .from(Array(14).keys())
-    .map(
-      (value)=>(
-        <li className="page-item" key={value}>
-          <button className={"page-link"+(value===stage ? " active" : "")} 
+    SLIDES.map(
+      (value, index)=>(
+        <li className="page-item" key={index}>
+          <button className={"page-link"+(index===SLIDES.indexOf(slide) ? " active" : "")} 
                   type="button"
-                  onClick={()=>{setSlide(value)}}>
-                    {value === 0 ? "Intro" : value}
+                  onClick={()=>{setSlide(SLIDES[index])}}>
+                    {index === 0 ? "Intro" : index}
           </button>
         </li>
       )
     )
   
-
   return (
     <div className="App">
-      <SquirrelMap camera={camera} stage={stage}></SquirrelMap>
+      <SquirrelMap slide={slide}></SquirrelMap>
       {
       showUI &&
-      <nav className="position-absolute d-none d-sm-block" style={{"bottom": "20px"}} aria-label="Slide controls">
+      <nav className="position-absolute d-none d-sm-block" 
+          style={{"bottom": "20px"}} 
+          aria-label="Slide controls">
         <ul className="pagination pagination-lg d-none d-lg-flex">
           {populatePagination()}
         </ul>
