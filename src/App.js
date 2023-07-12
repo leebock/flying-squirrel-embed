@@ -44,16 +44,36 @@ function App() {
       <SquirrelMap slide={slide}></SquirrelMap>
       {
       showUI &&
-      <nav className="position-absolute d-none d-sm-block" 
-          style={{"bottom": "20px"}} 
-          aria-label="Slide controls">
-        <ul className="pagination pagination-lg d-none d-lg-flex">
-          {populatePagination()}
-        </ul>
-        <ul className="pagination d-none d-sm-flex d-lg-none">
-          {populatePagination()}
-        </ul>
-      </nav>
+      <>
+        <button type="button" 
+                className={
+                  `btn btn-light btn-lg position-absolute d-sm-none ${SLIDES.indexOf(slide) === 0 && "disabled"}`
+                }
+                style={{left: "10px", bottom: "25px"}}
+                aria-label="Previous"
+                onClick={()=>{setSlide(SLIDES[SLIDES.indexOf(slide)-1])}}>
+          <span aria-hidden="true" style={{color: "#0d6efd"}}>&laquo;</span>
+        </button>
+        <nav className="position-absolute d-none d-sm-block" 
+            style={{"bottom": "20px"}} 
+            aria-label="Slide controls">
+          <ul className="pagination pagination-lg d-none d-lg-flex">
+            {populatePagination()}
+          </ul>
+          <ul className="pagination d-none d-sm-flex d-lg-none">
+            {populatePagination()}
+          </ul>
+        </nav>
+        <button type="button" 
+          className={
+            `btn btn-light btn-lg position-absolute d-sm-none ${SLIDES.indexOf(slide) >= SLIDES.length-1 && "disabled"}`
+          }
+          style={{right: "10px", bottom: "25px"}}
+          aria-label="Next"
+          onClick={()=>{setSlide(SLIDES[SLIDES.indexOf(slide)+1])}}>
+          <span aria-hidden="true" style={{color: "#0d6efd"}}>&raquo;</span>
+        </button>
+      </>
       }
     </div>
   );
